@@ -1,5 +1,5 @@
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .forms import addstud
 from .models import addstudent
 from django.contrib import messages
@@ -16,7 +16,7 @@ def add_show(request):
             modobject = addstudent(name=nm,email=em,password=pw)
             modobject.save()
             form = addstud() #to empty the form after adding the entry
-            messages.success(request, 'Student Added Successfully.')
+            messages.success(request, 'Record Added Successfully.')
     else:
         form = addstud()
     stud = addstudent.objects.all()
@@ -33,7 +33,7 @@ def update_data(request,id):
             form = addstud()
             stud = addstudent.objects.all()
             messages.success(request, 'Record Updated successfully.')
-            return redirect('/')
+            return HttpResponseRedirect('/')
     else: #if method is GET then
         getdata = addstudent.objects.get(pk=id)
         form = addstud(instance=getdata) #display form with instance data
