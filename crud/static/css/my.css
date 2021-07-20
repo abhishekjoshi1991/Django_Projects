@@ -1,0 +1,14 @@
+.nav-link:hover{
+    background-color:#d5d8db;
+    border:0px solid grey;
+    border-radius:10px;
+}
+.nav-link.active{
+    background-color:#0b3b8a;
+    border-radius:10px;
+    color:white;
+}
+
+.exp1:hover{
+    background-color:red;
+}

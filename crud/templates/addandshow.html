@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content%}
+{% load crispy_forms_tags %} 
+<div class="row">
+    <div class="col-sm-4 mt-1">
+        <h4 class="text-center alert alert-info" style="border:1px solid #427c80;"> Add New Student </h4>
+        {% include 'message.html' %}
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" id="btnclick" class="btn btn-success" value="{{add}}">
+        </form>
+    </div>
+    <div class="col-sm-8 mt-1">
+        
+        <h4 class="text-center alert alert-info" style="border:1px solid #427c80;"> Student Information</h4>
+        {% if stud %}
+        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for items in stud %}
+                <tr>
+                    <td>{{items.id}}</td>
+                    <td>{{items.name}}</td>
+                    <td>{{items.email}}</td>
+                    <td>{{items.password}}</td>
+                    <td><a href="{% url 'updatedata' items.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'deletedata' items.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h4 class="text-center alert alert-warning"> No Records To Display </h4>
+        {% endif %}
+    </div>
+</div>
+{% endblock content%}
